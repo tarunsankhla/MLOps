@@ -5,6 +5,7 @@ services:
     build:
       context: ./object-detection-react-app
       dockerfile: Dockerfile
+    image: object-detection-react-app_frontend:latest
     ports:
       - "3000:80"
     depends_on:
@@ -17,6 +18,7 @@ services:
     build:
       context: ./yolo-v5-flask-app
       dockerfile: Dockerfile
+    image: yolo-v5-flask-app_yoloapi:latest
     ports:
       - "5000:5000"
     networks:
@@ -26,6 +28,7 @@ services:
     build:
       context: ./depth-anything-flask-app
       dockerfile: Dockerfile
+    image: depth-anything-flask-app_depthapi:latest
     ports:
       - "5050:5050"
     networks:
