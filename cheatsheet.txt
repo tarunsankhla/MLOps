@@ -1,0 +1,25 @@
+docker-compose up
+
+http://localhost:3000/?yoloapi=http://127.0.0.1:5000&depthapi=http://localhost:5050
+
+docker tag yolo-flask-api 734862070647.dkr.ecr.us-east-1.amazonaws.com/yoloflask/api:dev
+
+docker tag depth-anything-flask-app 734862070647.dkr.ecr.us-east-1.amazonaws.com/depthanythingflask/api:dev
+
+docker tag object-detection-react-app 734862070647.dkr.ecr.us-east-1.amazonaws.com/objectdetectionreact/webapp:dev
+
+# (Optional) Authenticate with ECR
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 734862070647.dkr.ecr.us-east-1.amazonaws.com
+
+# Push the image to ECR
+
+aws ecr create-repository --repository-name yoloflask/api --region us-east-1   
+734862070647.dkr.ecr.us-east-1.amazonaws.com/yoloflask/api
+aws ecr create-repository --repository-name depthanythingflask/api --region us-east-1 
+734862070647.dkr.ecr.us-east-1.amazonaws.com/depthanythingflask/api
+aws ecr create-repository --repository-name objectdetectionreact/webapp --region us-east-1
+734862070647.dkr.ecr.us-east-1.amazonaws.com/objectdetectionreact/webapp
+
+docker push 734862070647.dkr.ecr.us-east-1.amazonaws.com/yoloflask/api:dev
+docker push 734862070647.dkr.ecr.us-east-1.amazonaws.com/depthanythingflask/api:dev
+docker push 734862070647.dkr.ecr.us-east-1.amazonaws.com/objectdetectionreact/webapp:dev
